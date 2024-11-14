@@ -161,7 +161,7 @@ public class FCityGenerator : EditorWindow
 
         RaycastHit hit;
 
-        GameObject[] tempArray = GameObject.FindObjectsOfType(typeof(GameObject)).Select(g => g as GameObject).Where(g => g.name == "RayCast-HideLadder").ToArray();
+        GameObject[] tempArray = GameObject.FindObjectsByType(typeof(GameObject), FindObjectsSortMode.None).Select(g => g as GameObject).Where(g => g.name == "RayCast-HideLadder").ToArray();
         foreach (GameObject ray in tempArray)
         {
 
@@ -334,7 +334,7 @@ public class FCityGenerator : EditorWindow
         if (GUILayout.Button("Remove Traffic System"))
         {
 
-            DestroyImmediate(GameObject.FindObjectOfType<TrafficSystem>().gameObject);
+            DestroyImmediate(GameObject.FindFirstObjectByType<TrafficSystem>().gameObject);
             DestroyImmediate(GameObject.Find("CarContainer"));
         }
 
@@ -393,7 +393,7 @@ public class FCityGenerator : EditorWindow
             GameObject module;
             GameObject[] my_Modules;
 
-            my_Modules = GameObject.FindObjectsOfType(typeof(GameObject)).Select(g => g as GameObject).Where(g => g.name == "Marcador").ToArray();
+            my_Modules = GameObject.FindObjectsByType(typeof(GameObject), FindObjectsSortMode.None).Select(g => g as GameObject).Where(g => g.name == "Marcador").ToArray();
 
             tt = my_Modules.Length;
 
@@ -446,7 +446,7 @@ public class FCityGenerator : EditorWindow
 
 
 
-            GameObject[] myModules = GameObject.FindObjectsOfType(typeof(GameObject)).Select(g => g as GameObject).Where(g => g.name == "_block").ToArray();
+            GameObject[] myModules = GameObject.FindObjectsByType(typeof(GameObject),FindObjectsSortMode.None).Select(g => g as GameObject).Where(g => g.name == "_block").ToArray();
 
 
             tt = myModules.Length;
@@ -488,7 +488,7 @@ public class FCityGenerator : EditorWindow
     void ShowGizmosActivate(bool active)
     {
 
-        FCGWaypointsContainer[] tArray = GameObject.FindObjectsOfType<FCGWaypointsContainer>();
+        FCGWaypointsContainer[] tArray = GameObject.FindObjectsByType<FCGWaypointsContainer>(FindObjectsSortMode.None);
 
         for (int f = 0; f < tArray.Length; f++)
             tArray[f].showGizmos = active;
@@ -501,12 +501,12 @@ public class FCityGenerator : EditorWindow
     private void AddVehicles(int right_Hand = 0)
     {
 
-        trafficSystem = FindObjectOfType<TrafficSystem>();
+        trafficSystem = FindFirstObjectByType<TrafficSystem>();
 
         if (!trafficSystem)
         {
             Instantiate((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Fantastic City Generator/Traffic System/Traffic System.prefab", (typeof(GameObject))));
-            trafficSystem = FindObjectOfType<TrafficSystem>();
+            trafficSystem = FindFirstObjectByType<TrafficSystem>();
 
         }
 
@@ -527,8 +527,8 @@ public class FCityGenerator : EditorWindow
     private void InverseCarDirection(int trafficHand)
     {
 
-        if (FindObjectOfType<TrafficSystem>())
-            trafficSystem = FindObjectOfType<TrafficSystem>();
+        if (FindFirstObjectByType<TrafficSystem>())
+            trafficSystem = FindFirstObjectByType<TrafficSystem>();
 
         if (!trafficSystem)
         {

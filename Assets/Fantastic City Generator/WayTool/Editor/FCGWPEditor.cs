@@ -75,7 +75,7 @@ public class FCGWPEditor : Editor{
                     
                     Vector3 newTilePosition = hit.point;
 
-                    FCGWaypointsContainer[] tArray = GameObject.FindObjectsOfType<FCGWaypointsContainer>();
+                    FCGWaypointsContainer[] tArray = GameObject.FindObjectsByType<FCGWaypointsContainer>(FindObjectsSortMode.None);
 
                     for (int f = 0; f < tArray.Length; f++)
                     {
